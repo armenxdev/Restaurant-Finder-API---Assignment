@@ -12,6 +12,12 @@ restaurantRouter.get(
 );
 
 restaurantRouter.get(
+    "/nearby",
+    validation(restaurantSchemas.nearbyQuerySchema, "query"),
+    controller.getNearbyRestaurants
+);
+
+restaurantRouter.get(
     "/:id",
     validation(restaurantSchemas.byIdSchema, "params"),
     controller.getRestaurantById

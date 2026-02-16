@@ -30,14 +30,16 @@ export const updateRestaurantSchema = {
     })
 };
 
-export const nearbyQuerySchema = Joi.object({
-    latitude: Joi.number().min(-90).max(90).required(),
-    longitude: Joi.number().min(-180).max(180).required(),
-    radius: Joi.number().min(1).max(50000).default(5000).optional(),
-    limit: Joi.number().integer().min(1).max(100).default(10).optional(),
-    cuisineType: Joi.string().optional(),
-    minRating: Joi.number().min(0).max(5).optional(),
-});
+export const nearbyQuerySchema = {
+    query: Joi.object({
+        latitude: Joi.number().min(-90).max(90).required(),
+        longitude: Joi.number().min(-180).max(180).required(),
+        radius: Joi.number().min(1).max(50000).default(5000).optional(),
+        limit: Joi.number().integer().min(1).max(100).default(10).optional(),
+        cuisineType: Joi.string().optional(),
+        minRating: Joi.number().min(0).max(5).optional(),
+    })
+};
 
 export const getAllQuerySchema = {
     query: Joi.object({

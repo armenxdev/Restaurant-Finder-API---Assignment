@@ -49,6 +49,10 @@ export default {
         }
     },
 
+    getNearbyRestaurants: async (req, res, next) => {
+
+    },
+
     getRestaurantById: async (req, res, next) => {
         try {
             const id = req.params.id;

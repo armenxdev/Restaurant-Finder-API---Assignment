@@ -24,7 +24,7 @@ export const productSchemas = {
 export const restaurantSchemas = {
     create: createRestaurantSchema,
     update: updateRestaurantSchema,
-    nearby: nearbyQuerySchema,
+    nearbyQuerySchema: nearbyQuerySchema,
     getAll: getAllQuerySchema,
     byIdSchema: restaurantByIdSchema
 }
