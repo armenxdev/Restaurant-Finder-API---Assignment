@@ -3,7 +3,11 @@ import validation from "../middlewares/validation.js";
 import controller from "../controllers/Restaurants.js";
 import { restaurantSchemas } from "../validators/index.js";
 
+
 const restaurantRouter = Router();
+
+
+
 
 restaurantRouter.get(
     "/",
@@ -12,10 +16,18 @@ restaurantRouter.get(
 );
 
 restaurantRouter.get(
+    "/nearby",
+    validation(restaurantSchemas.nearby, "query"),
+    controller.getNearbyRestaurants
+);
+
+restaurantRouter.get(
     "/:id",
     validation(restaurantSchemas.byIdSchema, "params"),
     controller.getRestaurantById
 );
+
+
 
 restaurantRouter.post(
     "/",

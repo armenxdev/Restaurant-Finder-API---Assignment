@@ -3,6 +3,7 @@ import validation from "../middlewares/validation.js";
 import controller from "../controllers/Users.js";
 import authorize from "../middlewares/authorize.js";
 import {usersSchemas} from "../validators/index.js";
+
 const usersRoutes = new Router();
 
 usersRoutes.post(

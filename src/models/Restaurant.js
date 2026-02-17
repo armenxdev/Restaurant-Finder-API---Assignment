@@ -85,7 +85,7 @@ Restaurant.init(
     }
 );
 
-Restaurant.beforeValidate((restaurant, options) => {
+Restaurant.beforeValidate((restaurant) => {
     const lat = parseFloat(restaurant.latitude);
     const lng = parseFloat(restaurant.longitude);
 
@@ -93,7 +93,6 @@ Restaurant.beforeValidate((restaurant, options) => {
         restaurant.location = { type: 'Point', coordinates: [lng, lat] };
     }
 });
-
 
 
 export default Restaurant;
