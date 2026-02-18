@@ -10,7 +10,7 @@ import path from "path";
 
 const __fileName =
     fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__fileName);
 
 const app = express();
 
