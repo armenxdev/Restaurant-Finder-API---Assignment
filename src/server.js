@@ -5,14 +5,25 @@ import cookieParser from "cookie-parser";
 import routes from './routes/index.js';
 import { seedRestaurants } from './seeders/seedRestaurants.js';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
-import productsRouter from "./routes/productRoutes.js";
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __fileName =
+    fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
+
+
 app.use(express.json());
+app.use('uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cookieParser());
+
 app.use('/api/restaurants', routes.restaurantRouter);
 app.use('/api/restaurants', routes.productsRouter);
 app.use('/api/users', routes.usersRouter);
+
+
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 3000;
@@ -23,9 +34,9 @@ async function initDatabase() {
         await sequelize.authenticate();
         console.log('✅ Database connected');
 
-        console.log('Syncing tables...');
-        await sequelize.sync({ alter: true });
-        console.log('✅ All tables synced');
+         console.log('Syncing tables...');
+         await sequelize.sync({ alter: true });
+         console.log('✅ All tables synced');
 
         // console.log('Seeding restaurants...');
         // await seedRestaurants();

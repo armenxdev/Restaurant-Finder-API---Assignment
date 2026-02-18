@@ -16,6 +16,12 @@ User.init(
             autoIncrement: true
         },
 
+        profilePicture: {
+            type: DataTypes.STRING(500),
+            allowNull: true,
+            defaultValue: null
+        },
+
         username: {
             type: DataTypes.STRING(100),
             allowNull: false,

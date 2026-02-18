@@ -22,8 +22,11 @@
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
     "lodash": "^4.17.23",
+    "mime-types": "^3.0.2",
+    "multer": "^2.0.2",
     "mysql2": "^3.17.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"

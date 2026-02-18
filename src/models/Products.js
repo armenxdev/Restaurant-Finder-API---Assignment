@@ -22,6 +22,13 @@ Product.init(
             }
         },
 
+        images: {
+            type: DataTypes.JSON,
+            allowNull: true,
+            defaultValue: null
+        },
+
+
         name: {
             type: DataTypes.STRING(255),
             allowNull: false,

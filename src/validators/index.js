@@ -12,6 +12,7 @@ import {
     getAllQuerySchema,
     restaurantByIdSchema
 } from "./restaurantvalidator.js";
+
 import {createUserSchema, loginSchema} from "./users.schema.js";
 
 export const productSchemas = {
