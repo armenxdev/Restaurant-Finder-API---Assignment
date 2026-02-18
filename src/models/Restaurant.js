@@ -11,6 +11,12 @@ Restaurant.init(
             autoIncrement: true
         },
 
+        coverImage: {
+            type: DataTypes.STRING(500),
+            allowNull: true,
+            defaultValue: null
+        },
+
         name: {
             type: DataTypes.STRING(255),
             allowNull: false,

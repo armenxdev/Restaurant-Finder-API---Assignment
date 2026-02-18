@@ -26,9 +26,9 @@ async function initDatabase() {
         await sequelize.authenticate();
         console.log('✅ Database connected');
 
-        // console.log('Syncing tables...');
-        // await sequelize.sync({ alter: true });
-        // console.log('✅ All tables synced');
+         console.log('Syncing tables...');
+         await sequelize.sync({ alter: true });
+         console.log('✅ All tables synced');
 
         // console.log('Seeding restaurants...');
         // await seedRestaurants();

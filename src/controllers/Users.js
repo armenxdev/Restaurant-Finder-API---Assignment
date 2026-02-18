@@ -2,6 +2,7 @@ import User from '../models/Users.js';
 import  jwt from 'jsonwebtoken';
 import {Op} from "sequelize";
 import 'dotenv/config'
+import fs from "fs/promises";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -37,6 +38,47 @@ export default {
                 user: userData
             });
         }catch (error) {
+            next(error);
+        }
+    },
+
+    updateProfilePicture: async (req, res, next) => {
+        try {
+            if (!req.file) {
+                return res.status(400).json({
+                    success: false,
+                    error: "No file uploaded",
+                });
+            }
+
+            const user = await User.findByPk(req.userId);
+
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    error: "User not found",
+                });
+            }
+
+            if (user.profilePicture) {
+                try {
+                    fs.unlinkSync(user.profilePicture);
+                } catch (e) {
+                    console.warn("Could not delete old picture:", e.message);
+                }
+            }
+
+            user.profilePicture = req.file.path;
+            await user.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Profile picture updated",
+                data: {
+                    profilePicture: user.profilePicture,
+                },
+            });
+        } catch (error) {
             next(error);
         }
     },

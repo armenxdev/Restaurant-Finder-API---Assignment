@@ -22,8 +22,6 @@ export default {
     },
 
     getAllRestaurants: async (req, res, next) => {
-        console.log("Started controller")
-
         try {
             const { page = 1, limit = 10, cuisineType, priceRange } = req.query;
 
@@ -50,6 +48,49 @@ export default {
 
         } catch (err) {
             next(err);
+        }
+    },
+
+    updateCoverImage: async (req, res, next) => {
+        try {
+            const { id: restaurantId } = req.params;
+
+            const restaurant = await Restaurant.findByPk(restaurantId);
+
+            if (!restaurant) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Restaurant not found",
+                });
+            }
+
+            if (!req.file) {
+                return res.status(400).json({
+                    success: false,
+                    error: "No file uploaded",
+                });
+            }
+
+            if (restaurant.coverImage) {
+                try {
+                    fs.unlinkSync(restaurant.coverImage);
+                } catch (e) {
+                    console.warn("Could not delete old cover image:", e.message);
+                }
+            }
+
+            restaurant.coverImage = req.file.path;
+            await restaurant.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Cover image updated",
+                data: {
+                    coverImage: restaurant.coverImage,
+                },
+            });
+        } catch (error) {
+            next(error);
         }
     },
 

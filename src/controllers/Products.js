@@ -1,5 +1,7 @@
 import Product from "../models/Products.js";
 import Restaurant from "../models/Restaurant.js";
+import fs from "fs/promises";
+
 
 export default {
     createProduct: async (req, res, next) => {
@@ -27,6 +29,48 @@ export default {
             });
         }catch (err){
             next(err)
+        }
+    },
+
+    addProductImages: async (req, res, next) => {
+        try {
+            const { productId } = req.params;
+
+            const product = await Product.findByPk(productId);
+
+            if (!product) {
+                return res.status(404).json({
+                    success: false,
+                    error: "Product not found",
+                });
+            }
+
+            let images = product.images;
+
+            if (req.files && req.files.length > 0) {
+                if (product.images && product.images.length > 0) {
+                    product.images.forEach((filePath) => {
+                        try {
+                            fs.unlinkSync(filePath);
+                        } catch (e) {
+                            console.warn("Could not delete:", filePath);
+                        }
+                    });
+                }
+
+                images = req.files.map((file) => file.path);
+            }
+
+            await product.update({ images });
+
+            return res.status(200).json({
+                success: true,
+                data: {
+                    images: product.images,
+                },
+            });
+        } catch (error) {
+            next(error);
         }
     },
 
