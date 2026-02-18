@@ -51,10 +51,6 @@ export default {
         }
     },
 
-<<<<<<< HEAD
-    getNearbyRestaurants: async (req, res, next) => {
-
-=======
     updateCoverImage: async (req, res, next) => {
         try {
             const { id: restaurantId } = req.params;
@@ -96,7 +92,6 @@ export default {
         } catch (error) {
             next(error);
         }
->>>>>>> fa620d8c40adbd424afcbd0a6e346df52cc8b2e3
     },
 
     getRestaurantById: async (req, res, next) => {

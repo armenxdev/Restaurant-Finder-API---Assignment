@@ -30,11 +30,7 @@ export const updateRestaurantSchema = {
     })
 };
 
-<<<<<<< HEAD
-export const nearbyQuerySchema = {
-=======
 export const nearbyQuerySchema ={
->>>>>>> fa620d8c40adbd424afcbd0a6e346df52cc8b2e3
     query: Joi.object({
         latitude: Joi.number().min(-90).max(90).required(),
         longitude: Joi.number().min(-180).max(180).required(),
